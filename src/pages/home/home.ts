@@ -5,40 +5,43 @@ import { RequestMethod } from '@angular/http';
 
 import { NativeStorage } from '@ionic-native/native-storage';
 import { AlertController } from 'ionic-angular';
-import { UserService } from '../../providers/user.service';
+import { ApiService } from '../../providers/api.service';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  products: Product[] = [];
+  searchFilter: any = {};
 
   constructor(
     public navCtrl: NavController,
-    private httpService: HttpService,
     private storage: NativeStorage,
-    private userService: UserService,
-    private alertCtrl: AlertController
-    
+    private alertCtrl: AlertController,
+    private apiService: ApiService
+        
   ) {
-
-    httpService.sendRequest(RequestMethod.Get, ['posts'], null, null, false)
-    .subscribe( res => {
-      console.log(res)
-    })
-
-    storage.getItem('token')
-    .then(token => {
-      if (token) {
-        userService.isLoggedIn = true;
-      }
-    })
-    .catch(err => {
-      alertCtrl.create({
-        message: JSON.stringify(err)
-      }).present();
-    })
-    
+    this.fetchProducts();
   }
 
+  fetchProducts(searchFilter: any = {}) {
+
+    this.apiService.product.getProducts(searchFilter)
+    .subscribe((products: Product[]) => {
+      this.products = products;
+    }, err => {
+      this.alertCtrl.create({
+        message: 'Something went wrong while getting products',
+        buttons: ['Ok']
+      }).present()
+    })    
+  }
+
+  onSearchInputChange(value: string) {
+    
+    this.searchFilter['title'] = value.trim();
+    this.fetchProducts(this.searchFilter);
+  }
 }

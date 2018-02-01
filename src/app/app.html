@@ -16,10 +16,12 @@
                 menuClose 
                 ion-item
                 (click)="onLoad(authenticationPage, {mode: 'signin'})"
+                *ngIf="userService && !userService.isLoggedIn"
                 >Sign In</button>
             <button 
             menuClose 
             ion-item
+            *ngIf="userService && !userService.isLoggedIn"
             (click)="onLoad(authenticationPage, {mode: 'signup'})"
                 >Sign Up</button>
             <button 

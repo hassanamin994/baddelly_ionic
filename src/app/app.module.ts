@@ -9,13 +9,14 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthenticationPage } from '../pages/authentication/authentication';
-
+import { SearchbarComponent } from '../components/searchbar/searchbar.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage'
 import { HttpService } from '../providers/http.service';
 import { ApiService } from '../providers/api.service';
 import { UserService } from '../providers/user.service';
+import { ProductService } from '../providers/product.service';
 import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { Facebook } from '@ionic-native/facebook';
     ContactPage,
     HomePage,
     TabsPage,
-    AuthenticationPage
+    AuthenticationPage,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { Facebook } from '@ionic-native/facebook';
     HttpService,
     ApiService,
     UserService,
+    ProductService,
     Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
