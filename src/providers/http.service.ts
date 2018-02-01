@@ -14,7 +14,7 @@ import { NativeStorage } from '@ionic-native/native-storage'
 @Injectable()
 export class HttpService {
 
-    rootUrl: string = 'https://jsonplaceholder.typicode.com';
+    rootUrl: string = 'https://baddelly.herokuapp.com/api';
 
     constructor(
         private http: Http,

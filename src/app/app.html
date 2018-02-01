@@ -1,1 +1,35 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="nav" >
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Baddelly</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button 
+            menuClose 
+            ion-item
+            (click)="onLoad(homePage)"
+            >Home</button>
+
+            <button 
+                menuClose 
+                ion-item
+                (click)="onLoad(authenticationPage, {mode: 'signin'})"
+                >Sign In</button>
+            <button 
+            menuClose 
+            ion-item
+            (click)="onLoad(authenticationPage, {mode: 'signup'})"
+                >Sign Up</button>
+            <button 
+            menuClose 
+            ion-item
+            (click)="onLoad(aboutPage)"
+                >About Baddelly</button>
+        </ion-list>
+    </ion-content>
+    
+</ion-menu>
+
+<ion-nav  #nav [root]="rootPage"></ion-nav>
